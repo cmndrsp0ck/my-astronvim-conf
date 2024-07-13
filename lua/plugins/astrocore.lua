@@ -62,6 +62,7 @@ return {
         ["<leader>tc"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
         ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
         ["<leader>tm"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
+        ["<leader>gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle git blame" },
         -- navigate buffer tabs with `H` and `L`
         L = {
           function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
