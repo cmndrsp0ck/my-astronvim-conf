@@ -61,8 +61,28 @@ return {
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
         ["<leader>tc"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
         ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
-        ["<leader>tm"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
+        ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
         ["<leader>gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle git blame" },
+        -- gitlab MR keymaps
+        ["<leader>gms"] = { "<cmd>lua require('gitlab').choose_merge_request()<cr>", desc = "Choose MR for review" },
+        ["<leader>gmr"] = { "<cmd>lua require('gitlab').review()<cr>", desc = "MR review current branch" },
+        ["<leader>gmq"] = { "<cmd>lua require('gitlab').close_review()<cr>", desc = "Close MR review" },
+        -- ["<leader>gmo"] = { "<cmd>lua require('gitlab').merge_request()<cr>", desc = "Open MR" },
+        -- ["<leader>gmC"] = { "<cmd>lua require('gitlab').create_mr()<cr>", desc = "Create MR" },
+        -- ["<leader>gmO"] = { "<cmd>lua require('gitlab').create_mr(true)<cr>", desc = "Create MR with current branch" },
+        -- ["<leader>gmj"] = { "<cmd>lua require('gitlab').jump_to_mr()<cr>", desc = "Jump to MR" },
+        -- ["<leader>gmJ"] = { "<cmd>lua require('gitlab').jump_to_mr(true)<cr>", desc = "Jump to MR with current branch" },
+        -- ["<leader>gmp"] = { "<cmd>lua require('gitlab').push_mr()<cr>", desc = "Push to MR" },
+        -- ["<leader>gmP"] = { "<cmd>lua require('gitlab').push_mr(true)<cr>", desc = "Push to MR with current branch" },
+        -- ["<leader>gmr"] = { "<cmd>lua require('gitlab').refresh_mr()<cr>", desc = "Refresh MR" },
+        -- ["<leader>gmR"] = { "<cmd>lua require('gitlab').refresh_mr(true)<cr>", desc = "Refresh MR with current branch" },
+        -- ["<leader>gmd"] = { "<cmd>lua require('gitlab').diff_mr()<cr>", desc = "Diff MR" },
+        -- ["<leader>gmD"] = { "<cmd>lua require('gitlab').diff_mr(true)<cr>", desc = "Diff MR with current branch" },
+        -- ["<leader>gms"] = { "<cmd>lua require('gitlab').status_mr()<cr>", desc = "MR status" },
+        -- ["<leader>gmS"] = { "<cmd>lua require('gitlab').status_mr(true)<cr>", desc = "MR status with current branch" },
+        -- ["<leader>gml"] = { "<cmd>lua require('gitlab').list_mr()<cr>", desc = "List MR" },
+        -- ["<leader>gmL"] = { "<cmd>lua require('gitlab').list_mr(true)<cr>", desc = "List MR with current branch" },
+        -- ["<leader>gt"] =
         -- navigate buffer tabs with `H` and `L`
         L = {
           function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
@@ -94,8 +114,8 @@ return {
         ["<C-l>"] = false,
       },
       v = {
-        ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "ChatGPT explain code" },
-        ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "ChatGPT summarize text" },
+        ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "GPT explain code" },
+        ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "GPT summarize text" },
       }
     },
   },
