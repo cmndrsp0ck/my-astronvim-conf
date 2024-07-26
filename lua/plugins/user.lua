@@ -82,7 +82,9 @@ return {
       )
     end,
   },
-
+  {
+    "sindrets/diffview.nvim",
+  },
   {
     "github/copilot.vim",
     lazy = false,
@@ -178,7 +180,7 @@ return {
   },
   {
     "ellisonleao/glow.nvim",
-    config = true,
+    -- config = true,
     cmd = "Glow",
     config = function()
       require("glow").setup({
