@@ -70,8 +70,16 @@ return {
         -- list of auto commands to set
         {
           -- events to trigger
-          event = { "InsertLeave", "BufEnter" },
-          -- the rest of the autocmd options (:h nvim_create_autocmd)
+        --   event = { "CursorHold", "CursorHoldI" },
+        --   -- the rest of the autocmd options (:h nvim_create_autocmd)
+        --   desc = "Document Highlighting",
+        --   callback = function() vim.lsp.buf.document_highlight() end,
+        -- },
+        -- {
+        --   event = { "CursorMoved", "CursorMovedI", "BufLeave" },
+        --   desc = "Document Highlighting Clear",
+        --   callback = function() vim.lsp.buf.clear_references() end,
+          event = { "CursorHold", "CursorHoldI" },
           desc = "Refresh codelens (buffer)",
           callback = function(args)
             if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
