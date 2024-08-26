@@ -96,6 +96,7 @@ return {
       },
       enabled = true,
       build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
+      commit = "aa5d3c1",
       config = function()
         require("gitlab").setup()
       end,
