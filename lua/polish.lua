@@ -48,10 +48,8 @@ vim.filetype.add {
     yaml = yaml_ft,
     xsh = "python",
   },
-}
-vim.filetype.add {
   filename = {
     ["inventory"] = "ini",
+    [".dockerignore"] = "gitignore",
   },
 }
-
