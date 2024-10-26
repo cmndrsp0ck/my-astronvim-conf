@@ -26,6 +26,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
+
 local function yaml_ft(path, bufnr)
   -- get content of buffer as string
   local content = vim.filetype.getlines(bufnr)
