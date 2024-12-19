@@ -101,31 +101,38 @@ return {
         require("gitlab").setup()
       end,
   },
-  {
-    "github/copilot.vim",
-    lazy = false,
-    -- event = "InsertEnter",
-    -- config = function()
-    -- end
+  -- {
+  --   "github/copilot.vim",
+  --   lazy = false,
+  --   -- event = "InsertEnter",
+  --   -- config = function()
+  --   -- end
+  -- },
+  { -- further customize the options set by the community
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+    opts = {
+      -- suggestion = {
+      --   keymap = {
+      --     accept = "<C-l>",
+      --     accept_word = false,
+      --     accept_line = false,
+      --     next = "<C-.>",
+      --     prev = "<C-,>",
+      --     dismiss = "<C/>",
+      --   },
+      -- },
+    },
   },
   {
     "AstroNvim/astrocommunity"
   },
-  { import = "astrocommunity.completion.copilot-lua" },
-  { -- further customize the options set by the community
-    "copilot.lua",
-    opts = {
-      suggestion = {
-        keymap = {
-          accept = "<C-l>",
-          accept_word = false,
-          accept_line = false,
-          next = "<C-.>",
-          prev = "<C-,>",
-          dismiss = "<C/>",
-        },
-      },
-    },
+  {
+    import = "astrocommunity.completion.copilot-lua",
   },
   {
     "folke/todo-comments.nvim",
