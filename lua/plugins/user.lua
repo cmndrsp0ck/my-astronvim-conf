@@ -87,26 +87,28 @@ return {
   },
   {
     "harrisoncramer/gitlab.nvim",
-      dependencies = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "sindrets/diffview.nvim",
-        "stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
-        "nvim-tree/nvim-web-devicons" -- Recommended but not required. Icons in discussion tree.
-      },
-      enabled = true,
-      build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
-      commit = "aa5d3c1",
-      config = function()
-        require("gitlab").setup()
-      end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+      "nvim-tree/nvim-web-devicons", -- Recommended but not required. Icons in discussion tree.
+    },
+    enabled = true,
+    build = function()
+      require("gitlab.server").build(true)
+    end, -- Builds the Go binary
+    commit = "aa5d3c1",
+    config = function()
+      require("gitlab").setup()
+    end,
   },
   -- {
   --   "github/copilot.vim",
   --   lazy = false,
-  --   -- event = "InsertEnter",
-  --   -- config = function()
-  --   -- end
+    -- event = "InsertEnter",
+    -- config = function()
+    -- end
   -- },
   { -- further customize the options set by the community
     "zbirenbaum/copilot.lua",
@@ -216,6 +218,52 @@ return {
       "nvim-telescope/telescope.nvim"
     }
   },
+  {
+    "olimorris/codecompanion.nvim",
+    config = function()
+      require("codecompanion").setup({
+        adapters = {
+          openai = function()
+            return require("codecompanion.adapters").extend("openai", {
+              env = {
+                api_key = "OPENAI_API_KEY",
+              },
+            })
+          end,
+        },
+        strategies = {
+          -- Change the default chat adapter
+          chat = { adapter = "openai" },
+          inline = { adapter = "openai" },
+          -- chat = { adapter = "gemini" },
+          -- inline = { adapter = "gemini" },
+          -- chat = { adapter = "copilot" },
+          -- inline = { adapter = "copilot" },
+        },
+      })
+    end,
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+      { "nvim-lua/plenary.nvim" },
+      -- Test with blink.cmp
+      -- {
+      --   "saghen/blink.cmp",
+      --   lazy = false,
+      --   version = "*",
+      --   opts = {
+      --     keymap = {
+      --       preset = "enter",
+      --       ["<S-Tab>"] = { "select_prev", "fallback" },
+      --       ["<Tab>"] = { "select_next", "fallback" },
+      --     },
+      --     sources = {
+      --       default = { "lsp", "path", "buffer", "codecompanion" },
+      --       cmdline = {}, -- Disable sources for command-line mode
+      --     },
+      --   },
+      -- },
+    },
+  },
   -- {
   --     "kiddos/gemini.nvim",
   --     build = { 'pip install -r requirements.txt', ':UpdateRemotePlugins' },
@@ -232,8 +280,8 @@ return {
     end,
   },
   {
-    'michaelb/sniprun',
-    run = 'bash ./install.sh',
+    "michaelb/sniprun",
+    run = "bash ./install.sh",
     lazy = false,
   },
   {
