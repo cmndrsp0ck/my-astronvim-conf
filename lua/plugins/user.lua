@@ -132,7 +132,6 @@ return {
     lazy = false,
     requires = "nvim-lua/plenary.nvim",
     config = function()
-      require("todo-comments").setup({})
     end
   },
   {
@@ -140,7 +139,6 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({})
     end
   },
   {
@@ -205,31 +203,10 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    config = function()
-      require("codecompanion").setup({
-        adapters = {
-          openai = function()
-            return require("codecompanion.adapters").extend("openai", {
-              env = {
-                api_key = "OPENAI_API_KEY",
-              },
-            })
-          end,
-        },
-        strategies = {
-          -- Change the default chat adapter
-          chat = { adapter = "openai" },
-          inline = { adapter = "openai" },
-          -- chat = { adapter = "gemini" },
-          -- inline = { adapter = "gemini" },
-          -- chat = { adapter = "copilot" },
-          -- inline = { adapter = "copilot" },
-        },
-      })
-    end,
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
       { "nvim-lua/plenary.nvim" },
+      { "ravitemer/mcphub.nvim" },
       -- Test with blink.cmp
       -- {
       --   "saghen/blink.cmp",
@@ -248,6 +225,69 @@ return {
       --   },
       -- },
     },
+    config = function()
+      require("codecompanion").setup({
+        adapters = {
+          openai = function()
+            return require("codecompanion.adapters").extend("openai", {
+              env = {
+                api_key = "OPENAI_API_KEY",
+              },
+            })
+          end,
+        },
+        strategies = {
+          -- Change the default chat adapter
+          chat = {
+            adapter = "openai",
+            tools = {
+              ["mcp"] = {
+                callback = require("mcphub.extensions.codecompanion"),
+                description = "Call tools and resources from the MCP Servers",
+                opts = {
+                  requires_approval = true
+                }
+              }
+            }
+
+          },
+          inline = { adapter = "openai" },
+          -- chat = { adapter = "gemini" },
+          -- inline = { adapter = "gemini" },
+          -- chat = { adapter = "copilot" },
+          -- inline = { adapter = "copilot" },
+        },
+      })
+    end,
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+    },
+    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+    config = function()
+      require("mcphub").setup({
+        -- Required options
+        port = 3000,  -- Port for MCP Hub server
+        config = vim.fn.expand("~/mcpservers.json"),  -- Absolute path to config file
+
+        -- Optional options
+        on_ready = function(hub)
+          -- Called when hub is ready
+        end,
+        on_error = function(err)
+          -- Called on errors
+        end,
+        shutdown_delay = 0, -- Wait 0ms before shutting down server after last client exits
+        log = {
+          level = vim.log.levels.WARN,
+          to_file = false,
+          file_path = nil,
+          prefix = "MCPHub"
+        },
+      })
+    end
   },
   -- {
   --     "kiddos/gemini.nvim",
