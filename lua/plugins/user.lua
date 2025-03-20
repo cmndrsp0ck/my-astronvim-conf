@@ -84,6 +84,16 @@ return {
     "sindrets/diffview.nvim",
   },
   {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    opts = {
+      preview = {
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
+      },
+    },
+  },
+  {
     "harrisoncramer/gitlab.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -223,6 +233,11 @@ return {
           -- inline = { adapter = "gemini" },
           -- chat = { adapter = "copilot" },
           -- inline = { adapter = "copilot" },
+        },
+        display = {
+          chat = {
+            auto_scroll = false
+          },
         },
       })
     end,
