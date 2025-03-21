@@ -236,7 +236,10 @@ return {
         },
         display = {
           chat = {
-            auto_scroll = false
+            show_header_separator = false,
+            separator = "-",
+            start_in_insert_mode = true,
+            auto_scroll = false,
           },
         },
       })
