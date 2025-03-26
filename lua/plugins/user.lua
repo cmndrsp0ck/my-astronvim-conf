@@ -224,13 +224,26 @@ return {
               },
             })
           end,
+          gemini2 = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              name = "gemini2",
+              schema = {
+                model = {
+                  default = "gemini-2.0-pro-exp-02-05"
+                },
+              },
+              env = {
+                api_key = "GEMINI_API_KEY",
+              },
+            })
+          end,
         },
         strategies = {
           -- Change the default chat adapter
-          chat = { adapter = "openai" },
-          inline = { adapter = "openai" },
-          -- chat = { adapter = "gemini" },
-          -- inline = { adapter = "gemini" },
+          -- chat = { adapter = "openai" },
+          -- inline = { adapter = "openai" },
+          chat = { adapter = "gemini" },
+          inline = { adapter = "gemini" },
           -- chat = { adapter = "copilot" },
           -- inline = { adapter = "copilot" },
         },
