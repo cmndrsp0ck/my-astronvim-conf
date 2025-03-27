@@ -17,26 +17,28 @@ return {
 
   -- == Examples of Overriding Plugins ==
 
-  -- customize alpha options
+  -- customize dashboard options
   {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-      }
-      return opts
-    end,
+    "folke/snacks.nvim",
+    opts = {
+      dashboard = {
+        preset = {
+          header = table.concat({
+            " █████  ███████ ████████ ██████   ██████ ",
+            "██   ██ ██         ██    ██   ██ ██    ██",
+            "███████ ███████    ██    ██████  ██    ██",
+            "██   ██      ██    ██    ██   ██ ██    ██",
+            "██   ██ ███████    ██    ██   ██  ██████ ",
+            "",
+            "███    ██ ██    ██ ██ ███    ███",
+            "████   ██ ██    ██ ██ ████  ████",
+            "██ ██  ██ ██    ██ ██ ██ ████ ██",
+            "██  ██ ██  ██  ██  ██ ██  ██  ██",
+            "██   ████   ████   ██ ██      ██",
+          }, "\n"),
+        },
+      },
+    },
   },
   -- You can disable default plugins as follows:
   {
@@ -103,20 +105,14 @@ return {
       "nvim-tree/nvim-web-devicons", -- Recommended but not required. Icons in discussion tree.
     },
     enabled = true,
-    build = function()
-      require("gitlab.server").build(true)
-    end, -- Builds the Go binary
-    config = function()
-      require("gitlab").setup()
-    end,
+    build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+    config = function() require("gitlab").setup() end,
   },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    config = function()
-      require("copilot").setup({})
-    end,
+    config = function() require("copilot").setup {} end,
     opts = {
       -- suggestion = {
       --   keymap = {
@@ -131,7 +127,7 @@ return {
     },
   },
   {
-    "AstroNvim/astrocommunity"
+    "AstroNvim/astrocommunity",
   },
   {
     import = "astrocommunity.completion.copilot-lua",
@@ -140,22 +136,18 @@ return {
     "folke/todo-comments.nvim",
     lazy = false,
     requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup({})
-    end
+    config = function() require("todo-comments").setup {} end,
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({})
-    end
+    config = function() require("nvim-surround").setup {} end,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
     config = function()
-      require("neo-tree").setup({
+      require("neo-tree").setup {
         filesystem = {
           follow_current_file = {
             enabled = true, -- This will find and focus the file in the active buffer every time
@@ -175,7 +167,7 @@ return {
             never_show = {},
           },
         },
-      })
+      }
     end,
   },
   {
@@ -194,28 +186,28 @@ return {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
-      require("chatgpt").setup({
+      require("chatgpt").setup {
         openai_params = {
-          model = 'gpt-4-turbo',
+          model = "gpt-4-turbo",
           frequency_penalty = 0,
           presence_penalty = 0,
           max_tokens = 4095,
           temperature = 0.3,
           top_p = 1,
-        }
-      })
+        },
+      }
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
+      "nvim-telescope/telescope.nvim",
+    },
   },
   {
     "olimorris/codecompanion.nvim",
     config = function()
-      require("codecompanion").setup({
+      require("codecompanion").setup {
         adapters = {
           openai = function()
             return require("codecompanion.adapters").extend("openai", {
@@ -229,7 +221,7 @@ return {
               name = "gemini2",
               schema = {
                 model = {
-                  default = "gemini-2.0-pro-exp-02-05"
+                  default = "gemini-2.0-pro-exp-02-05",
                 },
               },
               env = {
@@ -255,7 +247,7 @@ return {
             auto_scroll = false,
           },
         },
-      })
+      }
     end,
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -290,9 +282,7 @@ return {
   {
     "backdround/global-note.nvim",
     event = "VeryLazy",
-    config = function()
-      require("global-note").setup()
-    end,
+    config = function() require("global-note").setup() end,
   },
   {
     "michaelb/sniprun",
@@ -304,7 +294,7 @@ return {
     -- config = true,
     cmd = "Glow",
     config = function()
-      require("glow").setup({
+      require("glow").setup {
         -- glow_path = "",                -- will be filled automatically with your glow bin in $PATH, if any
         -- install_path = "~/.local/bin", -- default path for installing glow binary
         border = "shadow", -- floating window border config
@@ -314,7 +304,7 @@ return {
         height = 150,
         width_ratio = 0.8, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
         height_ratio = 0.8,
-      })
+      }
     end,
   },
   {

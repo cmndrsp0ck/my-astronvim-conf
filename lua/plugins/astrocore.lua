@@ -15,7 +15,7 @@ return {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = { virtual_text = true, virtual_lines = false }, -- diagnostic settings on startup
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
@@ -55,7 +55,10 @@ return {
         ["<leader>U"] = { "<cmd>UndotreeToggle<cr>", desc = "Toggle Undotree" },
         -- ["<leader>uP"] = { "<cmd>lua TogglePaste()<cr>", desc = "Toggle Paste" }
         -- Search for word in current buffer
-        ["<leader>fs"] = { "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>", desc = "Find words in current buffer" },
+        ["<leader>fs"] = {
+          "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>",
+          desc = "Find words in current buffer",
+        },
         ["<leader>fS"] = { "<cmd>Telescope aerial sorting_strategy=descending<cr>", desc = "Find symbols" },
         -- ToggleTerm mapping
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
@@ -117,7 +120,7 @@ return {
         -- this is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
         -- quick save
-        ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+        ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
       },
       t = {
         -- setting a mapping to false will disable it
@@ -127,7 +130,7 @@ return {
       v = {
         ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "GPT explain code" },
         ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "GPT summarize text" },
-      }
+      },
     },
   },
 }
