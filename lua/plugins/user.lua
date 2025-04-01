@@ -41,9 +41,24 @@ return {
     },
   },
   -- You can disable default plugins as follows:
+  -- {
+  --   "max397574/better-escape.nvim",
+  -- enabled = false,
+  -- },
   {
     "max397574/better-escape.nvim",
-    enabled = false,
+    config = function() require("better_escape").setup() end,
+  },
+  {
+    "nat-418/boole.nvim",
+    config = function()
+      require("boole").setup {
+        mappings = {
+          increment = "<C-a>",
+          decrement = "<C-x",
+        },
+      }
+    end,
   },
   {
     "L3MON4D3/LuaSnip",
@@ -294,7 +309,7 @@ return {
     -- config = true,
     cmd = "Glow",
     config = function()
-      require("glow").setup {
+      require("glow").setup() {
         -- glow_path = "",                -- will be filled automatically with your glow bin in $PATH, if any
         -- install_path = "~/.local/bin", -- default path for installing glow binary
         border = "shadow", -- floating window border config
