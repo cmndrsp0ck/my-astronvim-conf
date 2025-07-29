@@ -62,8 +62,14 @@ return {
         ["<leader>fS"] = { "<cmd>Telescope aerial sorting_strategy=descending<cr>", desc = "Find symbols" },
         -- ToggleTerm mapping
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
-        ["<leader>tc"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
+        ["<leader>tC"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
         ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
+        ["<leader>tca"] = { "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
+        ["<leader>tcc"] = { "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
+        ["<leader>tcC"] = { "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion Commit" },
+        ["<leader>tce"] = { "<cmd>CodeCompantion /explain<cr>", desc = "CodeCompanion Explain"},
+        ["<leader>tcf"] = { "<cmd>CodeCompantion /fix<cr>", desc = "CodeCompanion Fix"},
+        ["<leader>tch"] = { "<cmd>CodeCompanionHistory<cr>", desc = "CodeCompanion History" },
         ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
         ["<leader>gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle git blame" },
         -- gitlab MR keymaps
@@ -130,6 +136,9 @@ return {
       v = {
         ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "GPT explain code" },
         ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "GPT summarize text" },
+        ["<leader>tce"] = { "<cmd>CodeCompantion /explain<cr>", desc = "CodeCompanion Explain"},
+        ["<leader>tcf"] = { "<cmd>CodeCompantion /fix<cr>", desc = "CodeCompanion Fix"},
+        ["<leader>tct"] = { "<cmd>CodeCompantion /tests<cr>", desc = "CodeCompanion Unit Tests"},
       },
     },
   },
