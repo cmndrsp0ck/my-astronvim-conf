@@ -248,7 +248,7 @@ return {
             return require("codecompanion.adapters").extend("anthropic", {
               env = {
                 api_key = "ANTHROPIC_API_KEY",
-              }
+              },
             })
           end,
         },
@@ -306,7 +306,7 @@ return {
                   -- this can be a custom function that applies some custom
                   -- formatting to the title.
                   return original_title
-                end
+                end,
               },
               ---On exiting and entering neovim, loads the last chat on opening chat
               continue_last_chat = false,
@@ -344,7 +344,7 @@ return {
                 -- Tool configuration
                 tool_opts = {
                   -- Default number of memories to retrieve
-                  default_num = 10
+                  default_num = 10,
                 },
                 -- Enable notifications for indexing progress
                 notify = true,
@@ -352,9 +352,9 @@ return {
                 -- (requires VectorCode 0.6.12+ for efficient incremental indexing)
                 index_on_startup = false,
               },
-            }
-          }
-        }
+            },
+          },
+        },
       }
     end,
     dependencies = {
@@ -437,6 +437,33 @@ return {
         height = 150,
         width_ratio = 0.8, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
         height_ratio = 0.8,
+      }
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && /usr/local/bin/yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+    config = function()
+      vim.g.mkdp_auto_start = 0
+      vim.g.mkdp_auto_close = 1
+      vim.g.mkdp_refresh_slow = 0
+      vim.g.mkdp_command_for_global = 0
+      vim.g.mkdp_open_to_the_world = 0
+      vim.g.mkdp_open_ip = ''
+      vim.g.mkdp_echo_preview_url = 0
+      vim.g.mkdp_browser = '/usr/local/bin/waterfox'
+      vim.g.mkdp_preview_options = {
+        mkit = {},
+        katex = {},
+        uml = {},
+        maid = {},
+        disable_sync_scroll = 0,
+        sync_scroll_type = 'middle'
       }
     end,
   },

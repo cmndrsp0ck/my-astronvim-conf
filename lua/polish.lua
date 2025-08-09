@@ -58,3 +58,5 @@ vim.filetype.add {
     [".dockerignore"] = "gitignore",
   },
 }
+
+-- User commands
