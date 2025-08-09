@@ -69,6 +69,7 @@ return {
         ["<leader>tcC"] = { "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion Commit" },
         ["<leader>tce"] = { "<cmd>CodeCompanionChat #{buffer} explain<cr>", desc = "CodeCompanion Explain"},
         ["<leader>tch"] = { "<cmd>CodeCompanionHistory<cr>", desc = "CodeCompanion History" },
+        ["<leader>tM"] = {"<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview Toggle"},
         ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
         ["<leader>gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle git blame" },
         -- gitlab MR keymaps
