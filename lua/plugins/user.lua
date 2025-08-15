@@ -124,6 +124,37 @@ return {
     config = function() require("gitlab").setup() end,
   },
   {
+    "stevearc/dressing.nvim",
+    opts = {
+      select = {
+        backend = "telescope",
+        telescope = {
+          previewer = {
+            -- The global-note.nvim plugin must be required before this setup.
+            -- It's not lazy loaded, so it should be fine.
+            global_note = function(filepath_or_prompt, bufnr, opts)
+              local global_note = require("global-note")
+              if not global_note then
+                return
+              end
+
+              local filepath = global_note.get_note_filepath(filepath_or_prompt)
+              if not filepath then
+                return
+              end
+
+              require("telescope.previewers.utils").preview_file(
+                filepath,
+                bufnr,
+                opts
+              )
+            end,
+          },
+        },
+      },
+    },
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -415,7 +446,65 @@ return {
   {
     "backdround/global-note.nvim",
     event = "VeryLazy",
-    config = function() require("global-note").setup() end,
+    config = function()
+      local function get_project_name()
+        local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+        if project_name == "." or project_name == "" then
+          return "default"
+        end
+        return project_name
+      end
+
+      local function get_git_branch()
+        local handle = io.popen("git branch --show-current 2>/dev/null")
+        if not handle then
+          return "main"
+        end
+        
+        local branch = handle:read("*a")
+        handle:close()
+        
+        -- Remove newline and sanitize for filename
+        branch = branch:gsub("\n", ""):gsub("[^%w%-_]", "_")
+        if branch == "" then
+          return "main"
+        end
+        
+        return branch
+      end
+
+      require("global-note").setup({
+        additional_presets = {
+          work = {
+            filename = "work.md",
+            command_name = "WorkNote",
+          },
+          todos = {
+            filename = "todos.md",
+            command_name = "TodoNote",
+          },
+          project = {
+            filename = function()
+              return get_project_name() .. ".md"
+            end,
+            command_name = "ProjectNote",
+            title = "Project note",
+          },
+          git_branch = {
+            directory = function()
+              return get_project_name()
+            end,
+            filename = function()
+              return get_git_branch() .. ".md"
+            end,
+            command_name = "GitBranchNote",
+            title = function()
+              return get_git_branch()
+            end,
+          },
+        },
+      })
+    end,
   },
   {
     "michaelb/sniprun",
