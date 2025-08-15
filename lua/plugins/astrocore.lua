@@ -70,7 +70,11 @@ return {
         ["<leader>tce"] = { "<cmd>CodeCompanionChat #{buffer} explain<cr>", desc = "CodeCompanion Explain"},
         ["<leader>tch"] = { "<cmd>CodeCompanionHistory<cr>", desc = "CodeCompanion History" },
         ["<leader>tM"] = {"<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview Toggle"},
-        ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
+        -- ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
+        ["<leader>Gs"] = { "<cmd>lua _G.select_global_note()<cr>", desc = "Select global note" },
+        ["<leader>Gn"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Open global note" },
+        ["<leader>Gp"] = { "<cmd>ProjectNote<cr>", desc = "Open project note" },
+        ["<leader>Gg"] = { "<cmd>GitBranchNote<cr>", desc = "Open git branch note" },
         ["<leader>gB"] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle git blame" },
         -- gitlab MR keymaps
         ["<leader>gms"] = { "<cmd>lua require('gitlab').choose_merge_request()<cr>", desc = "Choose MR for review" },

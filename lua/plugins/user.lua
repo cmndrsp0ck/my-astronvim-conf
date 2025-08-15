@@ -473,7 +473,55 @@ return {
         return branch
       end
 
-      require("global-note").setup({
+      local global_note = require("global-note")
+      
+      local function select_note()
+        local options = {
+          {
+            name = "ProjectNote - " .. get_project_name(),
+            action = function() 
+              vim.cmd("ProjectNote")
+            end
+          },
+          {
+            name = "GitBranchNote - " .. get_git_branch(),
+            action = function()
+              vim.cmd("GitBranchNote")
+            end
+          },
+          {
+            name = "GlobalNote - Default",
+            action = function()
+              global_note.toggle_note()
+            end
+          },
+          {
+            name = "WorkNote",
+            action = function()
+              vim.cmd("WorkNote")
+            end
+          },
+          {
+            name = "TodoNote",
+            action = function()
+              vim.cmd("TodoNote")
+            end
+          },
+        }
+
+        vim.ui.select(options, {
+          prompt = "Select Note:",
+          format_item = function(item)
+            return item.name
+          end,
+        }, function(choice)
+          if choice then
+            choice.action()
+          end
+        end)
+      end
+
+      global_note.setup({
         additional_presets = {
           work = {
             filename = "work.md",
@@ -504,6 +552,9 @@ return {
           },
         },
       })
+
+      -- Make select_note function globally accessible
+      _G.select_global_note = select_note
     end,
   },
   {
