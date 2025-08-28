@@ -55,10 +55,10 @@ return {
         ["<leader>U"] = { "<cmd>UndotreeToggle<cr>", desc = "Toggle Undotree" },
         -- ["<leader>uP"] = { "<cmd>lua TogglePaste()<cr>", desc = "Toggle Paste" }
         -- Search for word in current buffer
-        ["<leader>fs"] = {
-          "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>",
-          desc = "Find words in current buffer",
-        },
+        -- ["<leader>fs"] = {
+        --   "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>",
+        --   desc = "Find words in current buffer",
+        -- },
         ["<leader>fS"] = { "<cmd>Telescope aerial sorting_strategy=descending<cr>", desc = "Find symbols" },
         -- ToggleTerm mapping
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
