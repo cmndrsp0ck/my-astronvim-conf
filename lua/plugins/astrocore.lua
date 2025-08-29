@@ -72,6 +72,7 @@ return {
         ["<leader>tch"] = { "<cmd>CodeCompanionHistory<cr>", desc = "CodeCompanion History" },
         ["<leader>tM"] = {"<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview Toggle"},
         -- ["<leader>N"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Toggle global note" },
+        ["<leader>G"] = { nil, desc = "GlobalNote" },
         ["<leader>Gs"] = { "<cmd>lua _G.select_global_note()<cr>", desc = "Select global note" },
         ["<leader>Gn"] = { "<cmd>lua require('global-note').toggle_note()<cr>", desc = "Open global note" },
         ["<leader>Gp"] = { "<cmd>ProjectNote<cr>", desc = "Open project note" },
