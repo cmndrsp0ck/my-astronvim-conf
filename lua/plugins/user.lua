@@ -255,33 +255,35 @@ return {
     config = function()
       require("codecompanion").setup {
         adapters = {
-          openai = function()
-            return require("codecompanion.adapters").extend("openai", {
-              env = {
-                api_key = "OPENAI_API_KEY",
-              },
-            })
-          end,
-          gemini2 = function()
-            return require("codecompanion.adapters").extend("gemini", {
-              name = "gemini2",
-              schema = {
-                model = {
-                  default = "gemini-2.0-pro-exp-02-05",
+          http = {
+            openai = function()
+              return require("codecompanion.adapters").extend("openai", {
+                env = {
+                  api_key = "OPENAI_API_KEY",
                 },
-              },
-              env = {
-                api_key = "GEMINI_API_KEY",
-              },
-            })
-          end,
-          anthropic = function()
-            return require("codecompanion.adapters").extend("anthropic", {
-              env = {
-                api_key = "ANTHROPIC_API_KEY",
-              },
-            })
-          end,
+              })
+            end,
+            gemini2 = function()
+              return require("codecompanion.adapters").extend("gemini", {
+                name = "gemini2",
+                schema = {
+                  model = {
+                    default = "gemini-2.0-pro-exp-02-05",
+                  },
+                },
+                env = {
+                  api_key = "GEMINI_API_KEY",
+                },
+              })
+            end,
+            anthropic = function()
+              return require("codecompanion.adapters").extend("anthropic", {
+                env = {
+                  api_key = "ANTHROPIC_API_KEY",
+                },
+              })
+            end,
+          },
         },
         strategies = {
           -- Change the default chat adapter
@@ -460,26 +462,26 @@ return {
         if not handle then
           return "main"
         end
-        
+
         local branch = handle:read("*a")
         handle:close()
-        
+
         -- Remove newline and sanitize for filename
         branch = branch:gsub("\n", ""):gsub("[^%w%-_]", "_")
         if branch == "" then
           return "main"
         end
-        
+
         return branch
       end
 
       local global_note = require("global-note")
-      
+
       local function select_note()
         local options = {
           {
             name = "ProjectNote - " .. get_project_name(),
-            action = function() 
+            action = function()
               vim.cmd("ProjectNote")
             end
           },

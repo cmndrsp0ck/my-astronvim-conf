@@ -64,6 +64,7 @@ return {
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
         ["<leader>tC"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
         ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
+        ["<leader>tc"] = { nil, desc = "CodeCompanion" },
         ["<leader>tca"] = { "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
         ["<leader>tcc"] = { "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
         ["<leader>tcC"] = { "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion Commit" },
