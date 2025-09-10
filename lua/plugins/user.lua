@@ -625,7 +625,7 @@ return {
         vim.api.nvim_set_option_value("background", "light", {})
         vim.cmd("colorscheme dayfox")
       end,
-      update_interval = 1000, -- Check every second
+      update_interval = 2000, -- Check every second
       fallback = "dark"
     },
   },
