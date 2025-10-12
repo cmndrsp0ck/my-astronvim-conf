@@ -623,7 +623,7 @@ return {
       end,
       set_light_mode = function()
         vim.api.nvim_set_option_value("background", "light", {})
-        vim.cmd("colorscheme kanagawa-lotus")
+        vim.cmd("colorscheme gruvbox")
       end,
       update_interval = 2000, -- Check every second
       fallback = "dark"
