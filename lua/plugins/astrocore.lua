@@ -24,6 +24,19 @@ return {
       virtual_text = true,
       underline = true,
     },
+    -- passed to `vim.filetype.add`
+    -- filetypes = {
+    --   -- see `:h vim.filetype.add` for usage
+    --   extension = {
+    --     foo = "fooscript",
+    --   },
+    --   filename = {
+    --     [".foorc"] = "fooscript",
+    --   },
+    --   pattern = {
+    --     [".*/etc/foo/.*"] = "fooscript",
+    --   },
+    -- },
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
@@ -62,8 +75,8 @@ return {
         ["<leader>fS"] = { "<cmd>Telescope aerial sorting_strategy=descending<cr>", desc = "Find symbols" },
         -- ToggleTerm mapping
         ["<C-\\>"] = { "<cmd>ToggleTerm direction=horizontal size=30<cr>", desc = "Open terminal in horizontal mode" },
-        ["<leader>tC"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
-        ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
+        -- ["<leader>tC"] = { "<cmd>ChatGPT<cr>", desc = "Open ChatGPT prompt" },
+        -- ["<leader>te"] = { "<cmd>ChatGPTEditWithInstructions<cr>", desc = "Open ChatGPTEditWithInstructions" },
         ["<leader>tc"] = { nil, desc = "CodeCompanion" },
         ["<leader>tca"] = { "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions" },
         ["<leader>tcc"] = { "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
@@ -110,14 +123,6 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-        -- L = {
-        --   function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-        --   desc = "Next buffer",
-        -- },
-        -- H = {
-        --   function() require("astrocore.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-        --   desc = "Previous buffer",
-        -- },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
@@ -126,13 +131,16 @@ return {
               function(bufnr) require("astrocore.buffer").close(bufnr) end
             )
           end,
-          desc = "Pick to close",
+          desc = "Close buffer from tabline",
         },
+
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
         -- quick save
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+        -- setting a mapping to false will disable it
+        -- ["<C-S>"] = false,
       },
       t = {
         -- setting a mapping to false will disable it
@@ -140,8 +148,8 @@ return {
         ["<C-l>"] = false,
       },
       v = {
-        ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "GPT explain code" },
-        ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "GPT summarize text" },
+        -- ["<leader>te"] = { "<cmd>ChatGPTRun explain_code<cr>", desc = "GPT explain code" },
+        -- ["<leader>ts"] = { "<cmd>ChatGPTRun summarize<cr>", desc = "GPT summarize text" },
         ["<leader>tce"] = { "<cmd>CodeCompanion /explain<cr>", desc = "CodeCompanion Explain"},
         ["<leader>tcf"] = { "<cmd>CodeCompanion /fix<cr>", desc = "CodeCompanion Fix"},
         ["<leader>tct"] = { "<cmd>CodeCompanion /tests<cr>", desc = "CodeCompanion Unit Tests"},

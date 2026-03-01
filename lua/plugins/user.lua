@@ -40,15 +40,14 @@ return {
       },
     },
   },
+
   -- You can disable default plugins as follows:
+  { "max397574/better-escape.nvim", enabled = true },
   -- {
   --   "max397574/better-escape.nvim",
-  -- enabled = false,
+  --   config = function() require("better_escape").setup() end,
   -- },
-  {
-    "max397574/better-escape.nvim",
-    config = function() require("better_escape").setup() end,
-  },
+  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "nat-418/boole.nvim",
     config = function()
@@ -63,9 +62,11 @@ return {
   {
     "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
-      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+      -- add more custom luasnip configuration such as filetype extend or custom snippets
       local luasnip = require "luasnip"
       luasnip.filetype_extend("javascript", { "javascriptreact" })
+      -- include the default astronvim config that calls the setup call
+      require "astronvim.plugins.configs.luasnip"(plugin, opts)
     end,
   },
   {
@@ -123,53 +124,53 @@ return {
     build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
     config = function() require("gitlab").setup() end,
   },
-  {
-    "letieu/jira.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    opts = {
-      jira = {
-        base = os.getenv("JIRA_BASE_URL") or "https://your-domain.atlassian.net",
-        email = os.getenv("JIRA_EMAIL") or "your-email@example.com",
-        token = os.getenv("JIRA_API_TOKEN") or "your-api-token",
-        limit = 500,
-      },
-    },
-  },
-  {
-    "stevearc/dressing.nvim",
-    opts = {
-      select = {
-        backend = "telescope",
-        telescope = {
-          previewer = {
-            -- The global-note.nvim plugin must be required before this setup.
-            -- It's not lazy loaded, so it should be fine.
-            global_note = function(filepath_or_prompt, bufnr, opts)
-              local global_note = require("global-note")
-              if not global_note then
-                return
-              end
-
-              local filepath = global_note.get_note_filepath(filepath_or_prompt)
-              if not filepath then
-                return
-              end
-
-              require("telescope.previewers.utils").preview_file(
-                filepath,
-                bufnr,
-                opts
-              )
-            end,
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "letieu/jira.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   opts = {
+  --     jira = {
+  --       base = os.getenv("JIRA_BASE_URL") or "https://your-domain.atlassian.net",
+  --       email = os.getenv("JIRA_EMAIL") or "your-email@example.com",
+  --       token = os.getenv("JIRA_API_TOKEN") or "your-api-token",
+  --       limit = 500,
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   opts = {
+  --     select = {
+  --       backend = "telescope",
+  --       telescope = {
+  --         previewer = {
+  --           -- The global-note.nvim plugin must be required before this setup.
+  --           -- It's not lazy loaded, so it should be fine.
+  --           global_note = function(filepath_or_prompt, bufnr, opts)
+  --             local global_note = require("global-note")
+  --             if not global_note then
+  --               return
+  --             end
+  --
+  --             local filepath = global_note.get_note_filepath(filepath_or_prompt)
+  --             if not filepath then
+  --               return
+  --             end
+  --
+  --             require("telescope.previewers.utils").preview_file(
+  --               filepath,
+  --               bufnr,
+  --               opts
+  --             )
+  --           end,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -244,28 +245,28 @@ return {
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     opts = { use_default_keymaps = false },
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup {
-        openai_params = {
-          model = "gpt-4-turbo",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          max_tokens = 4095,
-          temperature = 0.3,
-          top_p = 1,
-        },
-      }
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("chatgpt").setup {
+  --       openai_params = {
+  --         model = "gpt-4-turbo",
+  --         frequency_penalty = 0,
+  --         presence_penalty = 0,
+  --         max_tokens = 4095,
+  --         temperature = 0.3,
+  --         top_p = 1,
+  --       },
+  --     }
+  --   end,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "folke/trouble.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  -- },
   {
     "olimorris/codecompanion.nvim",
     config = function()
@@ -331,7 +332,7 @@ return {
               -- Number of days after which chats are automatically deleted (0 to disable)
               expiration_days = 0,
               -- Picker interface (auto resolved to a valid picker)
-              picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
+              picker = "snacks", --- ("telescope", "snacks", "fzf-lua", or "default")
               ---Optional filter function to control which chats are shown when browsing
               chat_filter = nil, -- function(chat_data) return boolean end
               -- Customize picker keymaps (optional)
