@@ -55,14 +55,17 @@ return {
   "carderne/pi-nvim",
   config = function() require("pi-nvim").setup()
     vim.keymap.del({"n", "v"}, "<leader>p")
-    vim.keymap.set("n", "<leader>apl", function() open_pi_split("pi") end)
-    vim.keymap.set("n", "<leader>apc", function() open_pi_split("pi --continue") end)
-    vim.keymap.set("n", "<leader>apr", pi_resume_picker)
-    vim.keymap.set("n", "<leader>api", ":Pi<CR>")
-    vim.keymap.set("n", "<leader>aps", ":PiSend<CR>")
-    vim.keymap.set("n", "<leader>apf", ":PiSendFile<CR>")
-    vim.keymap.set("v", "<leader>apv", ":PiSendSelection<CR>")
-    vim.keymap.set("n", "<leader>apb", ":PiSendBuffer<CR>")
-    vim.keymap.set("n", "<leader>app", ":PiPing<CR>")
+    require("which-key").add({
+      { "<leader>ap", group = "Pi" },
+    })
+    vim.keymap.set("n", "<leader>apl", function() open_pi_split("pi") end, { desc = "Pi launch split"})
+    vim.keymap.set("n", "<leader>apc", function() open_pi_split("pi --continue") end, { desc = "Pi continue"})
+    vim.keymap.set("n", "<leader>apr", pi_resume_picker, { desc = "Pi resume picker"})
+    vim.keymap.set("n", "<leader>api", ":Pi<CR>", { desc = "Pi send"})
+    vim.keymap.set("n", "<leader>aps", ":PiSend<CR>", { desc = "Pi send mini prompt"})
+    vim.keymap.set("n", "<leader>apf", ":PiSendFile<CR>", { desc = "Pi send file"})
+    vim.keymap.set("v", "<leader>apv", ":PiSendSelection<CR>", { desc = "Pi send selection"})
+    vim.keymap.set("n", "<leader>apb", ":PiSendBuffer<CR>", { desc = "Pi send buffer"})
+    vim.keymap.set("n", "<leader>app", ":PiPing<CR>", { desc = "Pi ping"})
   end,
 }
