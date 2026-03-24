@@ -25,5 +25,8 @@ return {
         sync_scroll_type = 'middle'
       }
     end,
+    keys = {
+      { "<leader>tM", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview Toggle", mode = "n" },
+    }
   },
 }

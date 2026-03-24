@@ -112,5 +112,12 @@ return {
       -- Make select_note function globally accessible
       _G.select_global_note = select_note
     end,
+    keys = {
+      { "<leader>G",  nil,                                                        desc = "GlobalNote" },
+      { "<leader>Gs", "<cmd>lua _G.select_global_note()<cr>",                     desc = "Select global note",     mode = "n" },
+      { "<leader>Gn", function() require("global-note").toggle_note() end,        desc = "Open global note",       mode = "n" },
+      { "<leader>Gp", "<cmd>ProjectNote<cr>",                                     desc = "Open project note",      mode = "n" },
+      { "<leader>Gg", "<cmd>GitBranchNote<cr>",                                   desc = "Open git branch note",   mode = "n" },
+    },
   },
 }

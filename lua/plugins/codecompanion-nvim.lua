@@ -1,6 +1,7 @@
 return {
   {
     "olimorris/codecompanion.nvim",
+    lazy = true,
     config = function()
       require("codecompanion").setup {
         adapters = {
@@ -139,6 +140,17 @@ return {
         },
       }
     end,
+    keys = {
+      { "<leader>aC", nil, desc = "CodeCompanion" },
+      { "<leader>aCa", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion Actions", mode = "n" },
+      { "<leader>aCo", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat", mode = "n" },
+      { "<leader>aCC", "<cmd>CodeCompanion /commit<cr>", desc = "CodeCompanion Commit", mode = "n" },
+      { "<leader>aCe", "<cmd>CodeCompanionChat #{buffer} explain<cr>", desc = "CodeCompanion Explain", mode = "n" },
+      { "<leader>aCh", "<cmd>CodeCompanionHistory<cr>", desc = "CodeCompanion History", mode = "n" },
+      { "<leader>aCE", "<cmd>CodeCompanion /explain<cr>", desc = "CodeCompanion Explain (selection)", mode = "v" },
+      { "<leader>aCf", "<cmd>CodeCompanion /fix<cr>", desc = "CodeCompanion Fix", mode = "v" },
+      { "<leader>aCt", "<cmd>CodeCompanion /tests<cr>", desc = "CodeCompanion Unit Tests", mode = "v" },
+    },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
       { "nvim-lua/plenary.nvim" },
