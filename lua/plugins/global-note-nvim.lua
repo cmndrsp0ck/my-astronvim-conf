@@ -82,10 +82,12 @@ return {
           work = {
             filename = "work.md",
             command_name = "WorkNote",
+            title = "Work note",
           },
           todos = {
             filename = "todos.md",
             command_name = "TodoNote",
+            title = "Todo note",
           },
           project = {
             filename = function()
@@ -193,6 +195,51 @@ return {
       -- Expose quick-add functions globally
       _G.send_visual_to_project_note = send_visual_to_project_note
       _G.send_line_to_project_note   = send_line_to_project_note
+
+      -- Toggle-maximize for any global-note floating window.
+      -- Fires when entering a floating markdown buffer (all global-note notes are .md).
+      vim.api.nvim_create_autocmd("BufWinEnter", {
+        group = vim.api.nvim_create_augroup("GlobalNoteMaximize", { clear = true }),
+        pattern = "*.md",
+        callback = function(args)
+          local win = vim.api.nvim_get_current_win()
+          local cfg = vim.api.nvim_win_get_config(win)
+          -- Only act on floating windows
+          if cfg.relative == nil or cfg.relative == "" then return end
+
+          local original_cfg = vim.deepcopy(cfg)
+          local maximized = false
+
+          local function do_maximize()
+            local ui = vim.api.nvim_list_uis()[1]
+            vim.api.nvim_win_set_config(win, {
+              relative = "editor",
+              width    = ui.width,
+              height   = ui.height - 2,
+              row      = 0,
+              col      = 0,
+              style    = "minimal",
+              border   = cfg.border or "rounded",
+            })
+            maximized = true
+          end
+
+          local function do_restore()
+            vim.api.nvim_win_set_config(win, original_cfg)
+            maximized = false
+          end
+
+          vim.keymap.set("n", "<M-m>", function()
+            if not maximized then do_maximize() else do_restore() end
+          end, { buffer = args.buf, desc = "Toggle maximize note window (Alt+m)" })
+
+          -- Auto-maximize when opened via a CLI alias with the flag set:
+          --   nvim --cmd "lua vim.g.global_note_open_maximized = true" -c "..."
+          if vim.g.global_note_open_maximized then
+            do_maximize()
+          end
+        end,
+      })
     end,
     keys = {
       { "<leader>G",  nil,                                                        desc = "GlobalNote" },
