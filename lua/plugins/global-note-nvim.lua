@@ -196,6 +196,12 @@ return {
       _G.send_visual_to_project_note = send_visual_to_project_note
       _G.send_line_to_project_note   = send_line_to_project_note
 
+      -- Register <leader>G as a named which-key group
+      local ok, wk = pcall(require, "which-key")
+      if ok then
+        wk.add({ { "<leader>G", group = "GlobalNote" } })
+      end
+
       -- Toggle-maximize for any global-note floating window.
       -- Fires when entering a floating markdown buffer (all global-note notes are .md).
       vim.api.nvim_create_autocmd("BufWinEnter", {
@@ -242,13 +248,12 @@ return {
       })
     end,
     keys = {
-      { "<leader>G",  nil,                                                        desc = "GlobalNote" },
-      { "<leader>Gs", "<cmd>lua _G.select_global_note()<cr>",                     desc = "Select global note",        mode = "n" },
-      { "<leader>Gn", function() require("global-note").toggle_note() end,        desc = "Open global note",          mode = "n" },
-      { "<leader>Gp", "<cmd>ProjectNote<cr>",                                     desc = "Open project note",         mode = "n" },
-      { "<leader>Gg", "<cmd>GitBranchNote<cr>",                                   desc = "Open git branch note",      mode = "n" },
-      { "<leader>Gv", "<cmd>lua _G.send_visual_to_project_note()<cr>",            desc = "Send selection to project note", mode = "v" },
-      { "<leader>Gy", "<cmd>lua _G.send_line_to_project_note()<cr>",              desc = "Send line to project note", mode = "n" },
+      { "<leader>Gs", "<cmd>lua _G.select_global_note()<cr>", desc = "Select global note", mode = "n" },
+      { "<leader>Gn", function() require("global-note").toggle_note() end, desc = "Open global note", mode = "n" },
+      { "<leader>Gp", "<cmd>ProjectNote<cr>", desc = "Open project note", mode = "n" },
+      { "<leader>Gg", "<cmd>GitBranchNote<cr>", desc = "Open git branch note", mode = "n" },
+      { "<leader>Gv", "<cmd>lua _G.send_visual_to_project_note()<cr>", desc = "Send selection to project note", mode = "v" },
+      { "<leader>Gy", "<cmd>lua _G.send_line_to_project_note()<cr>", desc = "Send line to project note", mode = "n" },
     },
   },
 }
