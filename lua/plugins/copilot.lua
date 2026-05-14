@@ -3,7 +3,11 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    config = function() require("copilot").setup {} end,
+    config = function()
+      require("copilot").setup({
+        copilot_model = "gpt-5.5",
+      })
+    end,
     opts = {
       -- suggestion = {
       --   keymap = {
