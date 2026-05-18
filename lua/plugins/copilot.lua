@@ -4,9 +4,7 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({
-        copilot_model = "gpt-5.5",
-      })
+      require("copilot").setup({})
     end,
     opts = {
       -- suggestion = {
