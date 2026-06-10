@@ -1,10 +1,9 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 return {
   {
     'akinsho/git-conflict.nvim',
     version = "*",
-    lazy = true,
     config = function()
       require("git-conflict").setup({
         debug = false,
