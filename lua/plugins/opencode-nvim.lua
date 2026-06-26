@@ -1,4 +1,50 @@
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+
 return {
+  {
+    "nickjvandyke/opencode.nvim",
+    version = "*", -- Latest stable release
+    dependencies = {
+      {
+        -- `snacks.nvim` integration is recommended, but optional
+        ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
+        "folke/snacks.nvim",
+        optional = true,
+        opts = {
+          input = {}, -- Enhances `ask()`
+          picker = { -- Enhances `select()`
+            actions = {
+              opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
+            },
+            win = {
+              input = {
+                keys = {
+                  ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {
+        -- Your configuration, if any; goto definition on the type or field for details
+      }
+      vim.o.autoread = true -- Required for `opts.events.reload`
+    end,
+    keys = {
+      { "<leader>ao", nil, desc = "Opencode" },
+      { "<leader>aoa", function() require("opencode").ask("@this: ", { submit = true }) end, desc = "Ask opencode…", mode = { "n", "x" } },
+      { "<leader>aox", function() require("opencode").select() end, desc = "Execute opencode action…", mode = { "n", "x" } },
+      { "<leader>aot", function() require("opencode").toggle() end, desc = "Toggle opencode", mode = { "n", "t" } },
+      { "<leader>aos", function() return require("opencode").operator("@this ") end, desc = "Add range to opencode", mode = { "n", "x" }, expr = true },
+      { "<leader>aoS", function() return require("opencode").operator("@this ") .. "_" end, desc = "Add line to opencode", mode = "n", expr = true },
+      { "<S-C-u>", function() require("opencode").command("session.half.page.up") end, desc = "Scroll opencode up", mode = "n" },
+      { "<S-C-d>", function() require("opencode").command("session.half.page.down") end, desc = "Scroll opencode down", mode = "n" },
+    },
+  },
   -- {
   --   "sudo-tee/opencode.nvim",
   --   config = function()
@@ -239,48 +285,4 @@ return {
   --   -- 'nvim_mini/mini.nvim',
   --   },
   -- },
-  {
-    "nickjvandyke/opencode.nvim",
-    version = "*", -- Latest stable release
-    dependencies = {
-      {
-        -- `snacks.nvim` integration is recommended, but optional
-        ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
-        "folke/snacks.nvim",
-        optional = true,
-        opts = {
-          input = {}, -- Enhances `ask()`
-          picker = { -- Enhances `select()`
-            actions = {
-              opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
-            },
-            win = {
-              input = {
-                keys = {
-                  ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    config = function()
-      ---@type opencode.Opts
-      vim.g.opencode_opts = {
-        -- Your configuration, if any; goto definition on the type or field for details
-      }
-      vim.o.autoread = true -- Required for `opts.events.reload`
-    end,
-    keys = {
-      { "<leader>ao", nil, desc = "Opencode" },
-      { "<leader>aoa", function() require("opencode").ask("@this: ", { submit = true }) end, desc = "Ask opencode…", mode = { "n", "x" } },
-      { "<leader>aox", function() require("opencode").select() end, desc = "Execute opencode action…", mode = { "n", "x" } },
-      { "<leader>aot", function() require("opencode").toggle() end, desc = "Toggle opencode", mode = { "n", "t" } },
-      { "<leader>aos", function() return require("opencode").operator("@this ") end, desc = "Add range to opencode", mode = { "n", "x" }, expr = true },
-      { "<leader>aoS", function() return require("opencode").operator("@this ") .. "_" end, desc = "Add line to opencode", mode = "n", expr = true },
-      { "<S-C-u>", function() require("opencode").command("session.half.page.up") end, desc = "Scroll opencode up", mode = "n" },
-      { "<S-C-d>", function() require("opencode").command("session.half.page.down") end, desc = "Scroll opencode down", mode = "n" },
-    },
-  },
 }
